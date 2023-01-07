@@ -40,7 +40,7 @@ function Bird:load()
     self.flapPosition = 2
     self.flapDelay = 1
 
-    self.flyFallConstant = 1400
+    self.flyFallConstant = 1500
     self.flyVertSpeed = 0
     self.flyJumpSpeed = -420
 

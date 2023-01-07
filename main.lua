@@ -84,11 +84,13 @@ function love.draw()
     base:draw()
     bird:draw()
 
-    banners:score(Score)
 
     if Waiting then
         banners:waiting()
+    else
+        banners:score(Score)
     end
+
 
     if Gameover then
         banners:gameover()

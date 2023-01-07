@@ -28,7 +28,7 @@ function PipePair:new(index, pipeImage)
     o.width = o.img:getWidth() * Scale
 
     o.gap = bird.height * 4
-    o.gapBetweenPairs = o.width * 3
+    o.gapBetweenPairs = o.width * 3.2
 
     o.top = {
         x = love.graphics.getWidth() + o.gapBetweenPairs * index,
