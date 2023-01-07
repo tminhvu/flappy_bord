@@ -1,4 +1,5 @@
 local base = require "base"
+local sound = require "sound"
 local Bird = {}
 
 local birdAssets = {
@@ -86,6 +87,7 @@ end
 --]]
 
 function Bird:jump(_)
+    sound:playJumpSound()
     self.flyVertSpeed = self.flyJumpSpeed
 end
 
@@ -145,6 +147,7 @@ function Bird:isCollidingWPipes(pipePair)
             pipePair[i]:bottomContainsPoint(self.x, self.y + self.height)
 
         if top or bottom then
+            sound:playHitSound()
             return true
         end
     end
@@ -152,7 +155,14 @@ function Bird:isCollidingWPipes(pipePair)
 end
 
 function Bird:isCollidingWBase()
-    return self.y + self.height >= base.y
+    local collide = self.y + self.height >= base.y
+
+    if collide then
+        sound:playHitSound()
+        return true
+    end
+
+    return false
 end
 
 function Bird:draw()

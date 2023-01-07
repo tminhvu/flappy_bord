@@ -2,6 +2,7 @@ local bird = require('bird')
 local base = require('base')
 local pipes = require('pipes')
 local banners = require('banners')
+local sound = require('sound')
 
 local backgrounds = {
     love.graphics.newImage('assets/sprites/background-night.png'),
@@ -24,12 +25,14 @@ end
 function love.keypressed(key)
     if key == 'space' and Waiting then
         Waiting = false
+        sound:playSwooshSound()
     end
 
     if key == 'space' and not Gameover then
         bird.jumping = true
     elseif key == 'return' and Gameover then
         love.load()
+        sound:playSwooshSound()
     end
 
     if key == 'escape' or key == 'q' then
@@ -40,6 +43,7 @@ end
 local function updateScore()
     if BirdIsPassing then
         if not BirdWasPassing then
+            sound:playPointSound()
             Score = Score + 1
         end
     end
@@ -65,6 +69,9 @@ function love.update(dt)
         checkPassing()
         updateScore()
         Gameover = bird:isCollidingWPipes(pipes.pipes) or bird:isCollidingWBase()
+        if Gameover then
+            sound:playDieSound()
+        end
         base:update(dt)
         pipes:update(dt)
     end
