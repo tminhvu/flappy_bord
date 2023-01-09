@@ -23,12 +23,12 @@ function love.load()
 end
 
 function love.keypressed(key)
-    if key == 'space' and Waiting then
+    if (key == 'space' or key == 'j') and Waiting then
         Waiting = false
         sound:playSwooshSound()
     end
 
-    if key == 'space' and not Gameover then
+    if (key == 'space' or key == 'j') and not Gameover then
         bird.jumping = true
     elseif key == 'return' and Gameover then
         love.load()
